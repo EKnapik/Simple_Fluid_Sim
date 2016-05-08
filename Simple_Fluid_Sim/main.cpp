@@ -13,3 +13,11 @@ int main(int argc, const char * argv[]) {
     std::cout << "Hello, World!\n";
     return 0;
 }
+
+
+/*
+ Render Loop
+ Object
+    How to render it
+ Step Function
+ */

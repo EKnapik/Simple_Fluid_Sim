@@ -25,6 +25,7 @@ public:
     void drawObj();
     
     glm::vec3 pos = glm::vec3(0.0, 0.0, 0.0);
+    float radius = 0.5;
     
 private:
     static bool initialized;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		134DBBA51CE0EF9600F049D8 /* FluidMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 134DBBA31CE0EF9600F049D8 /* FluidMath.cpp */; };
 		13508D301CDEEBEF0093059A /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13508D2E1CDEEBEF0093059A /* Sphere.cpp */; };
 		13508D331CDEEC090093059A /* FluidParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13508D311CDEEC090093059A /* FluidParticle.cpp */; };
 		13508D361CDEEC340093059A /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13508D341CDEEC340093059A /* Plane.cpp */; };
@@ -34,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		13074DC61CE0D98400B4E8AD /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = SOURCE_ROOT; };
+		134DBBA31CE0EF9600F049D8 /* FluidMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FluidMath.cpp; path = FluidMath/FluidMath.cpp; sourceTree = SOURCE_ROOT; };
+		134DBBA41CE0EF9600F049D8 /* FluidMath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FluidMath.hpp; path = FluidMath/FluidMath.hpp; sourceTree = SOURCE_ROOT; };
 		13508D2E1CDEEBEF0093059A /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sphere.cpp; path = Sphere/Sphere.cpp; sourceTree = "<group>"; };
 		13508D2F1CDEEBEF0093059A /* Sphere.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Sphere.hpp; path = Sphere/Sphere.hpp; sourceTree = "<group>"; };
 		13508D311CDEEC090093059A /* FluidParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FluidParticle.cpp; path = FluidParticle/FluidParticle.cpp; sourceTree = "<group>"; };
@@ -63,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		134DBB9D1CE0EF2500F049D8 /* FluidMath */ = {
+			isa = PBXGroup;
+			children = (
+				134DBBA31CE0EF9600F049D8 /* FluidMath.cpp */,
+				134DBBA41CE0EF9600F049D8 /* FluidMath.hpp */,
+			);
+			name = FluidMath;
+			sourceTree = "<group>";
+		};
 		13508D2D1CDEEBB70093059A /* Plane */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +127,7 @@
 		13A954E61CDE4EDA001044A6 /* Simple_Fluid_Sim */ = {
 			isa = PBXGroup;
 			children = (
+				134DBB9D1CE0EF2500F049D8 /* FluidMath */,
 				13074DC61CE0D98400B4E8AD /* glm */,
 				13C3D4FD1CDF6D6C0081FAF3 /* Shaderz */,
 				13508D2D1CDEEBB70093059A /* Plane */,
@@ -194,6 +207,7 @@
 				13508D301CDEEBEF0093059A /* Sphere.cpp in Sources */,
 				13508D331CDEEC090093059A /* FluidParticle.cpp in Sources */,
 				13508D361CDEEC340093059A /* Plane.cpp in Sources */,
+				134DBBA51CE0EF9600F049D8 /* FluidMath.cpp in Sources */,
 				13A954E81CDE4EDA001044A6 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

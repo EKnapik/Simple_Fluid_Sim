@@ -8,7 +8,7 @@ void main() {
 
     
     // Model transformations
-    float scale = 0.5;
+    float scale = 0.166;
     // Fix the trans because of camera error
     vec3 transMod = vec3(trans.x, -trans.y, -trans.z);
     

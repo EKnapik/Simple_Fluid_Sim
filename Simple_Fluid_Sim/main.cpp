@@ -9,8 +9,10 @@
 #include <GLUT/GLUT.h>
 #include <OpenGL/gl.h>
 #include <iostream>
+#include <unistd.h>
 #include <time.h>
 #include "Sphere.hpp"
+#include "FluidParticle.hpp"
 
 
 
@@ -18,7 +20,10 @@
 #define WINDOW_HEIGHT 800
 #define WINDOW_WIDTH 800
 
-Sphere *sphere;
+#define microFrameTime 33333
+
+FluidParticle *particle;
+int waitTime;
 
 void initOpenGL(void);
 void render(void);
@@ -31,8 +36,8 @@ int main(int argc, char * argv[]) {
     glutDisplayFunc(render);
     initOpenGL();
     
-    sphere = new Sphere();
-    
+    particle = new FluidParticle(glm::vec3(0.0, 1.0, 0.0));
+    waitTime = 0;
     glutMainLoop();
     return 0; // Cause GLUT allows us to even get back here...... (it doesn't)
 }
@@ -60,14 +65,20 @@ void render(void) {
     float renderTime;
     // DO SOMETHING
     
-    sphere->drawObj();
+    particle->drawObj();
+    particle->pos += glm::vec3(0.0, -0.1, 0.0);
+    
     
     t = clock() - t;
-    renderTime = t;
-    printf("Render took (%.4f seconds)\n",((float)renderTime)/CLOCKS_PER_SEC);
+    renderTime = ((float)t)/CLOCKS_PER_SEC;
+    printf("Render took (%.4f seconds)\n", renderTime);
+    
+    waitTime = microFrameTime - t;
+    if(waitTime > 0) { usleep(waitTime); } // sleep for n microseconds
+    
     glutSwapBuffers();
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#!#!#!#!#!#!
-    // glutPostRedisplay();
+    glutPostRedisplay();
 }
 
 

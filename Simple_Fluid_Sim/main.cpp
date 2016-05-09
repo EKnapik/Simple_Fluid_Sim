@@ -10,12 +10,15 @@
 #include <OpenGL/gl.h>
 #include <iostream>
 #include <time.h>
+#include "Sphere.hpp"
 
 
 
 // 16 x 9
 #define WINDOW_HEIGHT 450
 #define WINDOW_WIDTH 800
+
+Sphere *sphere;
 
 void initOpenGL(void);
 void render(void);
@@ -27,6 +30,8 @@ int main(int argc, char * argv[]) {
     glutCreateWindow("Simple Fluid Simulation");
     glutDisplayFunc(render);
     initOpenGL();
+    
+    sphere = new Sphere();
     
     glutMainLoop();
     return 0; // Cause GLUT allows us to even get back here...... (it doesn't)
@@ -53,13 +58,12 @@ void render(void) {
     clock_t t;
     t = clock();
     float renderTime;
-    
     // DO SOMETHING
+    
+    sphere->drawObj();
+    
     t = clock() - t;
     renderTime = t;
-    
-
-    
     printf("Render took (%.4f seconds)\n",((float)renderTime)/CLOCKS_PER_SEC);
     glutSwapBuffers();
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#!#!#!#!#!#!

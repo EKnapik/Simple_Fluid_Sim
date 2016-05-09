@@ -16,7 +16,7 @@
 #include "shaderSetup.hpp"
 
 
-
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 class Sphere {
 public:
@@ -27,8 +27,9 @@ private:
     static bool initialized;
     static GLuint vBuffer;
     static GLuint shaderPrg;
-    GLfloat *vertexData;
-    GLint numVerticies;
+    static GLuint vPosition;
+    static GLfloat *vertexData;
+    static GLint numVert;
     
     void setupGLBuffers();
     void setVertexData();

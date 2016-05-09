@@ -1,7 +1,6 @@
-#version 150
+#version 120
 
-in vec4 vPosition;
-
+attribute vec4 vPosition;
 
 void main() {
     gl_Position = vPosition;

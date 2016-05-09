@@ -26,9 +26,12 @@ public:
 private:
     static bool initialized;
     static GLuint vBuffer;
+    static GLuint eBuffer;
     static GLuint shaderPrg;
     static GLuint vPosition;
+    
     static GLfloat *vertexData;
+    static GLushort *elemData;
     static GLint numVert;
     
     void setupGLBuffers();

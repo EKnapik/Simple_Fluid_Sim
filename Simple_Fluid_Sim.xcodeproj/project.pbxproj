@@ -13,22 +13,22 @@
 		135FF7DA1CDE502E0001FD6C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 135FF7D91CDE502E0001FD6C /* GLUT.framework */; };
 		13A954E81CDE4EDA001044A6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13A954E71CDE4EDA001044A6 /* main.cpp */; };
 		13A954EF1CDE4F10001044A6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A954EE1CDE4F10001044A6 /* OpenGL.framework */; };
+		13C3165C1CE0338D0013DB69 /* Sphere.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 13C3D4FE1CDF6E680081FAF3 /* Sphere.frag */; };
+		13C3165D1CE0338D0013DB69 /* Sphere.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 13C3D4FF1CDF6E680081FAF3 /* Sphere.vert */; };
 		13C3D5021CDF6E7D0081FAF3 /* shaderSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13C3D5001CDF6E7D0081FAF3 /* shaderSetup.cpp */; };
-		13C3D5031CE027060081FAF3 /* Sphere.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 13C3D4FE1CDF6E680081FAF3 /* Sphere.frag */; };
-		13C3D5041CE027060081FAF3 /* Sphere.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 13C3D4FF1CDF6E680081FAF3 /* Sphere.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		13A954E21CDE4EDA001044A6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
-				13C3D5031CE027060081FAF3 /* Sphere.frag in CopyFiles */,
-				13C3D5041CE027060081FAF3 /* Sphere.vert in CopyFiles */,
+				13C3165C1CE0338D0013DB69 /* Sphere.frag in CopyFiles */,
+				13C3165D1CE0338D0013DB69 /* Sphere.vert in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 

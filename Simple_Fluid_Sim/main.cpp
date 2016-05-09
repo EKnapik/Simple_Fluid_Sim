@@ -15,7 +15,7 @@
 
 
 // 16 x 9
-#define WINDOW_HEIGHT 450
+#define WINDOW_HEIGHT 800
 #define WINDOW_WIDTH 800
 
 Sphere *sphere;

@@ -14,6 +14,8 @@ GLuint Sphere::vBuffer = 0;
 GLuint Sphere::eBuffer = 0;
 GLuint Sphere::shaderPrg = 0;
 GLuint Sphere::vPosition = 0;
+GLuint Sphere::transLoc = 0;
+
 GLfloat *Sphere::vertexData = NULL;
 GLushort *Sphere::elemData = NULL;
 GLint Sphere::numVert = 0;
@@ -31,6 +33,7 @@ void Sphere::drawObj() {
     // pass the vertex to the shader the offset is 0 because it is first
     glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
     // PASS OTHER SHADER INFO
+    glUniform3f(Sphere::transLoc, this->pos.x, this->pos.y, this->pos.z);
     
     glDrawElements( GL_TRIANGLES, Sphere::numVert, GL_UNSIGNED_SHORT, (void *)0 );
 }
@@ -59,6 +62,7 @@ void Sphere::setupGLBuffers() {
     Sphere::shaderPrg = shaderSetup("Sphere.vert", "Sphere.frag");
     // TODO SETUP VERTEX POSITIONAL DATA AND STUFF
     Sphere::vPosition = glGetAttribLocation(Sphere::shaderPrg, "vPosition" );
+    Sphere::transLoc = glGetUniformLocation(Sphere::shaderPrg, "trans");
     
     Sphere::initialized = true;
 }

@@ -13,6 +13,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+#include "../glm/vec3.hpp"
 #include "shaderSetup.hpp"
 
 
@@ -23,12 +24,15 @@ public:
     Sphere();
     void drawObj();
     
+    glm::vec3 pos = glm::vec3(0.0, 0.0, 0.0);
+    
 private:
     static bool initialized;
     static GLuint vBuffer;
     static GLuint eBuffer;
     static GLuint shaderPrg;
     static GLuint vPosition;
+    static GLuint transLoc;
     
     static GLfloat *vertexData;
     static GLushort *elemData;

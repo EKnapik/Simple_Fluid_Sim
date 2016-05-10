@@ -2,13 +2,7 @@
 
 attribute vec4 vPosition;
 
-uniform vec3 trans;
-
 void main() {
-
-    
-    // Model transformations
-    float scale = 0.66;
     
     // Camera parameters
     vec3 cPosition = vec3(0.0, 1.0, 3.0);
@@ -23,15 +17,6 @@ void main() {
     float near = 1.0;
     float far = -1.0;
     
-    mat4 xlateMat = mat4( 1.0,     0.0,     0.0,     0.0,
-                         0.0,     1.0,     0.0,     0.0,
-                         0.0,     0.0,     1.0,     0.0,
-                         trans.x, trans.y, trans.z, 1.0 );
-    
-    mat4 scaleMat = mat4( scale,  0.0,     0.0,     0.0,
-                         0.0,      scale, 0.0,     0.0,
-                         0.0,      0.0,     scale, 0.0,
-                         0.0,      0.0,     0.0,     1.0 );
     
     // Create view matrix
     vec3 nVec = normalize( cPosition - cLookAt);
@@ -55,10 +40,5 @@ void main() {
                         0.0, 0.0, ((-2.0*far*near)/(far-near)), 0.0 );
     
     // Transformation order:
-    //    scale, rotate Z, rotate Y, rotate X, translate
-    mat4 modelMat = xlateMat * scaleMat;
-    mat4 modelViewMat = viewMat * modelMat;
-    
-    
-    gl_Position =  projMat * viewMat * modelMat * vPosition;
+    gl_Position =  projMat * viewMat * vPosition;
 }

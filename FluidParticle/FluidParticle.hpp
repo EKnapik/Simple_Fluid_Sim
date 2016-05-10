@@ -18,7 +18,7 @@
  witht the value too low the kernel functions won't work properly and with it
  too high the fluid will explode
  */
-#define FLUID_NUM_PARTICLES 27
+#define FLUID_NUM_PARTICLES 216
 #define FLUID_PARTICLE_MASS 0.02
 #define FLUID_CONSTANT_K 3.5
 #define FLUID_FRICTION_MU 3.5
@@ -39,12 +39,15 @@ public:
     FluidParticle(glm::vec3 pos);
     FluidParticle(glm::vec3 pos, float radius);
     
+    
     void updateParticle(float timeStep, FluidParticle **fluidParticles, int numParticles);
     void updateDensity(FluidParticle **fluidParticles, int numParticles);
     void updatePressure();
     void updateGradPressureOverDensity(FluidParticle **fluidParticles, int numParticles);
     void updateViscosityGradSquaredVelocity(FluidParticle **fluidParticles, int numParticles);
     void collisionDetection(FluidParticle **fluidParticles, int numParticles, float timeStep);
+    void collisionHandle(FluidParticle *particle);
+    void boundsConstraint();
     
     // position covered by inheritance
     static int _id;

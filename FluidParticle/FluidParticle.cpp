@@ -120,11 +120,68 @@ void FluidParticle::updateViscosityGradSquaredVelocity(FluidParticle **fluidPart
  */
 void FluidParticle::collisionDetection(FluidParticle **fluidParticles, int numParticles, float timeStep) {
     // Check Bounding Box
-    
     for(int i = 0; i < numParticles; i++) {
         if(this->id != fluidParticles[i]->id) {
-            // mirrorCollisionHandling(fluidParticles[i], timeStep);
+            collisionHandle(fluidParticles[i]);
         }
+    }
+}
+
+void FluidParticle::collisionHandle(FluidParticle *particle) {
+    float dist = glm::length(this->pos - particle->pos) - this->radius - particle->radius;
+    float epsilon = 0.0001;
+    if(dist < epsilon) {
+        glm::vec3 particleNorm = glm::normalize(this->pos - particle->pos);
+        // change the velocities
+        this->velocity = glm::reflect(this->velocity, particleNorm);
+        particle->velocity = glm::reflect(particle->velocity, -particleNorm);
+        // move outside of the object
+        this->pos += particleNorm*(dist+epsilon);
+        particle->pos += -particleNorm*(dist+epsilon);
+    }
+}
+
+void FluidParticle::boundsConstraint() {
+    float epsilon = 0.001;
+    bool fixed = false;
+    glm::vec3 norm;
+    /*
+    if(this->pos.x < xMin) {
+        this->pos.x = xMin + epsilon;
+        fixed = true;
+        norm = glm::vec3(1.0, 0.0, 0.0);
+    }
+    if(this->pos.x > xMax) {
+        this->pos.x = xMax - epsilon;
+        fixed = true;
+        norm = glm::vec3(-1.0, 0.0, 0.0);
+    }
+     */
+    if(this->pos.y < yMin) {
+        this->pos.y = yMin + epsilon;
+        fixed = true;
+        norm = glm::vec3(0.0, 1.0, 0.0);
+    }
+    if(this->pos.y > yMax) {
+        this->pos.y = yMax - epsilon;
+        fixed = true;
+        norm = glm::vec3(0.0, -1.0, 0.0);
+    }
+    /*
+    if(this->pos.z < zMin) {
+        this->pos.z = zMin + epsilon;
+        fixed = true;
+        norm = glm::vec3(0.0, 0.0, 1.0);
+    }
+    if(this->pos.z > zMax) {
+        this->pos.z = zMax - epsilon;
+        fixed = true;
+        norm = glm::vec3(0.0, 0.0, -1.0);
+    }
+     */
+    
+    if(fixed) {
+        this->velocity = glm::reflect(this->velocity, norm);
     }
 }
 

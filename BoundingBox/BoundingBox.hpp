@@ -18,12 +18,12 @@
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 // Bounding Box
-#define xMin -1.0
-#define xMax 1.0
+#define xMin -2.0
+#define xMax 2.0
 #define yMin 0.0
 #define yMax 30.0
-#define zMin -1.0
-#define zMax 1.0
+#define zMin -2.0
+#define zMax 2.0
 
 
 class BoundingBox {

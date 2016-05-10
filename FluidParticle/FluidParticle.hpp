@@ -18,21 +18,21 @@
  witht the value too low the kernel functions won't work properly and with it
  too high the fluid will explode
  */
-#define FLUID_NUM_PARTICLES 216
+#define FLUID_NUM_PARTICLES 512
 #define FLUID_PARTICLE_MASS 0.02
-#define FLUID_CONSTANT_K 3.5
+#define FLUID_CONSTANT_K 3
 #define FLUID_FRICTION_MU 3.5
-#define FLUID_H_VALUE .0625
+#define FLUID_H_VALUE .045
 #define FLUID_RADIUS 0.01685  // the particle's radius
-#define FLUID_REST_DENSITY 1000
+#define FLUID_REST_DENSITY 998
 
 // Bounding Box
-#define xMin -5.0
-#define xMax 5.0
+#define xMin -2.0
+#define xMax 2.0
 #define yMin 0.0
 #define yMax 30.0
-#define zMin -5.0
-#define zMax 5.0
+#define zMin -2.0
+#define zMax 2.0
 
 class FluidParticle: public Sphere {
 public:

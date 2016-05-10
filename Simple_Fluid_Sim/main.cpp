@@ -105,7 +105,7 @@ void initParticles(void) {
     particles = new FluidParticle *[numParticles];
     
     float currX = 0.0;
-    float currY = 0.4;
+    float currY = 1.0;
     float currZ = 0.0;
     
     int tmp = powf(numParticles, float(1.0/3.0));
@@ -117,11 +117,11 @@ void initParticles(void) {
             for(int w = 0; w < tmp; w++) {
                 particles[count] = new FluidParticle(glm::vec3(currX, currY, currZ));
                 count++;
-                currX += (2*FLUID_RADIUS);
+                currX += (4*FLUID_RADIUS);
             }
-            currZ -= (2*FLUID_RADIUS);
+            currZ -= (4*FLUID_RADIUS);
         }
-        currY += (2*FLUID_RADIUS);
+        currY += (4*FLUID_RADIUS);
     }
 }
 
@@ -155,8 +155,8 @@ void updateParticles(void) {
     for(int i = 0; i < numParticles; i++) {
         particles[i]->boundsConstraint();
     }
-    //for(int i = 0; i < numParticles; i++) {
-    //    particles[i]->collisionDetection(particles, numParticles, TIME_DELTA);
-    //}
+    for(int i = 0; i < numParticles; i++) {
+        particles[i]->collisionDetection(particles, numParticles, TIME_DELTA);
+    }
    
 }

@@ -8,10 +8,10 @@ void main() {
 
     
     // Model transformations
-    float scale = 0.166;
+    float scale = 0.066;
     
     // Camera parameters
-    vec3 cPosition = vec3(0.0, 1.0, 3.0);
+    vec3 cPosition = vec3(0.0, 1.0, 5.0);
     vec3 cLookAt = vec3(0.0, 0.0, -1.0);
     vec3 upVec = vec3(0.0, 1.0, 0.0); // can be modified with roll matrix
     

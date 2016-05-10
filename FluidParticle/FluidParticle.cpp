@@ -133,8 +133,8 @@ void FluidParticle::collisionHandle(FluidParticle *particle) {
     if(dist < epsilon) {
         glm::vec3 particleNorm = glm::normalize(this->pos - particle->pos);
         // change the velocities
-        this->velocity = glm::reflect(this->velocity, particleNorm);
-        particle->velocity = glm::reflect(particle->velocity, -particleNorm);
+        this->velocity = glm::reflect(this->velocity, particleNorm) * float(0.9);
+        particle->velocity = glm::reflect(particle->velocity, -particleNorm) * float(0.9);
         // move outside of the object
         this->pos += particleNorm*(dist+epsilon);
         particle->pos += -particleNorm*(dist+epsilon);
@@ -142,10 +142,9 @@ void FluidParticle::collisionHandle(FluidParticle *particle) {
 }
 
 void FluidParticle::boundsConstraint() {
-    float epsilon = 0.001;
+    float epsilon = 0.0166;
     bool fixed = false;
     glm::vec3 norm;
-    /*
     if(this->pos.x < xMin) {
         this->pos.x = xMin + epsilon;
         fixed = true;
@@ -156,7 +155,6 @@ void FluidParticle::boundsConstraint() {
         fixed = true;
         norm = glm::vec3(-1.0, 0.0, 0.0);
     }
-     */
     if(this->pos.y < yMin) {
         this->pos.y = yMin + epsilon;
         fixed = true;
@@ -167,7 +165,6 @@ void FluidParticle::boundsConstraint() {
         fixed = true;
         norm = glm::vec3(0.0, -1.0, 0.0);
     }
-    /*
     if(this->pos.z < zMin) {
         this->pos.z = zMin + epsilon;
         fixed = true;
@@ -178,10 +175,9 @@ void FluidParticle::boundsConstraint() {
         fixed = true;
         norm = glm::vec3(0.0, 0.0, -1.0);
     }
-     */
     
     if(fixed) {
-        this->velocity = glm::reflect(this->velocity, norm);
+        this->velocity = glm::reflect(this->velocity, norm) * float(0.9);
     }
 }
 

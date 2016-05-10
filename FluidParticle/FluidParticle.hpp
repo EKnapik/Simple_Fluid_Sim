@@ -26,6 +26,14 @@
 #define FLUID_RADIUS 0.01685  // the particle's radius
 #define FLUID_REST_DENSITY 1000
 
+// Bounding Box
+#define xMin -5.0
+#define xMax 5.0
+#define yMin 0.0
+#define yMax 30.0
+#define zMin -5.0
+#define zMax 5.0
+
 class FluidParticle: public Sphere {
 public:
     FluidParticle(glm::vec3 pos);

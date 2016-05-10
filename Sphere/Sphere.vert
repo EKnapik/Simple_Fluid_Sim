@@ -8,14 +8,12 @@ void main() {
 
     
     // Model transformations
-    float scale = 0.166;
-    // Fix the trans because of camera error
-    vec3 transMod = vec3(trans.x, -trans.y, -trans.z);
+    float scale = 0.66;
     
     // Camera parameters
     vec3 cPosition = vec3(0.0, 0.0, 3.0);
     vec3 cLookAt = vec3(0.0, 0.0, 0.0);
-    vec3 rightVec = vec3(1.0, 0.0, 0.0); // can be modified with roll matrix
+    vec3 upVec = vec3(0.0, 1.0, 0.0); // can be modified with roll matrix
     
     // View volume boundaries
     float left = -1.0;
@@ -28,7 +26,7 @@ void main() {
     mat4 xlateMat = mat4( 1.0,     0.0,     0.0,     0.0,
                          0.0,     1.0,     0.0,     0.0,
                          0.0,     0.0,     1.0,     0.0,
-                         transMod.x, transMod.y, transMod.z, 1.0 );
+                         trans.x, trans.y, trans.z, 1.0 );
     
     mat4 scaleMat = mat4( scale,  0.0,     0.0,     0.0,
                          0.0,      scale, 0.0,     0.0,
@@ -36,17 +34,17 @@ void main() {
                          0.0,      0.0,     0.0,     1.0 );
     
     // Create view matrix
-    vec3 nVec = normalize( cLookAt - cPosition );
-    vec3 uVec = normalize( cross (nVec, rightVec) );
-    vec3 vVec = normalize( cross (uVec, nVec) );
+    vec3 nVec = normalize( cPosition - cLookAt);
+    vec3 uVec = normalize( cross(upVec, nVec) );
+    vec3 vVec = normalize( cross(nVec, uVec) );
     
     
-    mat4 viewMat = mat4( vVec.x, vVec.y, vVec.z, 0.0,
-                        uVec.x, uVec.y, uVec.z, 0.0,
-                        nVec.x, nVec.y, nVec.z, 0.0,
-                        dot(vVec, cPosition),
-                        dot(uVec, cPosition),
-                        dot(nVec, cPosition), 1.0 );
+    mat4 viewMat = mat4( uVec.x, vVec.x, nVec.x, 0.0,
+                        uVec.y, vVec.y, nVec.y, 0.0,
+                        uVec.z, vVec.z, nVec.z, 0.0,
+                        -dot(uVec, cPosition),
+                        -dot(vVec, cPosition),
+                        -dot(nVec, cPosition), 1.0 );
     
     // Create projection matrix
     mat4 projMat = mat4( (2.0*near)/(right-left), 0.0, 0.0, 0.0,

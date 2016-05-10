@@ -11,6 +11,9 @@
 		13508D301CDEEBEF0093059A /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13508D2E1CDEEBEF0093059A /* Sphere.cpp */; };
 		13508D331CDEEC090093059A /* FluidParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13508D311CDEEC090093059A /* FluidParticle.cpp */; };
 		13508D361CDEEC340093059A /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13508D341CDEEC340093059A /* Plane.cpp */; };
+		135E7E251CE1633600D6B74A /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 135E7E231CE1633600D6B74A /* BoundingBox.cpp */; };
+		135E7E281CE16B9200D6B74A /* BoundingBox.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 135E7E261CE16AC500D6B74A /* BoundingBox.frag */; };
+		135E7E291CE16B9200D6B74A /* BoundingBox.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 135E7E271CE16AC500D6B74A /* BoundingBox.vert */; };
 		135FF7DA1CDE502E0001FD6C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 135FF7D91CDE502E0001FD6C /* GLUT.framework */; };
 		13A954E81CDE4EDA001044A6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13A954E71CDE4EDA001044A6 /* main.cpp */; };
 		13A954EF1CDE4F10001044A6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A954EE1CDE4F10001044A6 /* OpenGL.framework */; };
@@ -26,6 +29,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				135E7E281CE16B9200D6B74A /* BoundingBox.frag in CopyFiles */,
+				135E7E291CE16B9200D6B74A /* BoundingBox.vert in CopyFiles */,
 				13C3165C1CE0338D0013DB69 /* Sphere.frag in CopyFiles */,
 				13C3165D1CE0338D0013DB69 /* Sphere.vert in CopyFiles */,
 			);
@@ -43,6 +48,10 @@
 		13508D321CDEEC090093059A /* FluidParticle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FluidParticle.hpp; path = FluidParticle/FluidParticle.hpp; sourceTree = "<group>"; };
 		13508D341CDEEC340093059A /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Plane.cpp; path = Plane/Plane.cpp; sourceTree = SOURCE_ROOT; };
 		13508D351CDEEC340093059A /* Plane.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Plane.hpp; path = Plane/Plane.hpp; sourceTree = SOURCE_ROOT; };
+		135E7E231CE1633600D6B74A /* BoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BoundingBox.cpp; path = BoundingBox/BoundingBox.cpp; sourceTree = SOURCE_ROOT; };
+		135E7E241CE1633600D6B74A /* BoundingBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BoundingBox.hpp; path = BoundingBox/BoundingBox.hpp; sourceTree = SOURCE_ROOT; };
+		135E7E261CE16AC500D6B74A /* BoundingBox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = BoundingBox.frag; path = BoundingBox/BoundingBox.frag; sourceTree = SOURCE_ROOT; };
+		135E7E271CE16AC500D6B74A /* BoundingBox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = BoundingBox.vert; path = BoundingBox/BoundingBox.vert; sourceTree = SOURCE_ROOT; };
 		135FF7D91CDE502E0001FD6C /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		13A954E41CDE4EDA001044A6 /* Simple_Fluid_Sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Simple_Fluid_Sim; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A954E71CDE4EDA001044A6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -82,6 +91,17 @@
 				13508D351CDEEC340093059A /* Plane.hpp */,
 			);
 			name = Plane;
+			sourceTree = "<group>";
+		};
+		135E7E211CE1630900D6B74A /* BoundingBox */ = {
+			isa = PBXGroup;
+			children = (
+				135E7E261CE16AC500D6B74A /* BoundingBox.frag */,
+				135E7E271CE16AC500D6B74A /* BoundingBox.vert */,
+				135E7E231CE1633600D6B74A /* BoundingBox.cpp */,
+				135E7E241CE1633600D6B74A /* BoundingBox.hpp */,
+			);
+			name = BoundingBox;
 			sourceTree = "<group>";
 		};
 		13A414EB1CDEEB4800AF72EA /* Sphere */ = {
@@ -127,6 +147,7 @@
 		13A954E61CDE4EDA001044A6 /* Simple_Fluid_Sim */ = {
 			isa = PBXGroup;
 			children = (
+				135E7E211CE1630900D6B74A /* BoundingBox */,
 				134DBB9D1CE0EF2500F049D8 /* FluidMath */,
 				13074DC61CE0D98400B4E8AD /* glm */,
 				13C3D4FD1CDF6D6C0081FAF3 /* Shaderz */,
@@ -204,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13C3D5021CDF6E7D0081FAF3 /* shaderSetup.cpp in Sources */,
+				135E7E251CE1633600D6B74A /* BoundingBox.cpp in Sources */,
 				13508D301CDEEBEF0093059A /* Sphere.cpp in Sources */,
 				13508D331CDEEC090093059A /* FluidParticle.cpp in Sources */,
 				13508D361CDEEC340093059A /* Plane.cpp in Sources */,

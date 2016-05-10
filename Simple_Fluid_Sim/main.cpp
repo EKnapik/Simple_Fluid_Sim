@@ -13,6 +13,7 @@
 #include <time.h>
 #include "Sphere.hpp"
 #include "FluidParticle.hpp"
+#include "BoundingBox.hpp"
 
 
 
@@ -23,6 +24,8 @@
 #define microFrameTime 33333
 
 FluidParticle *particle;
+BoundingBox *box;
+
 int waitTime;
 
 void initOpenGL(void);
@@ -36,7 +39,9 @@ int main(int argc, char * argv[]) {
     glutDisplayFunc(render);
     initOpenGL();
     
-    particle = new FluidParticle(glm::vec3(0.0, 1.0, 0.0));
+    particle = new FluidParticle(glm::vec3(0.0, 0.0, 0.0));
+    box = new BoundingBox();
+    
     waitTime = 0;
     glutMainLoop();
     return 0; // Cause GLUT allows us to even get back here...... (it doesn't)
@@ -64,7 +69,7 @@ void render(void) {
     t = clock();
     float renderTime;
     // DO SOMETHING
-    
+    box->drawObj();
     particle->drawObj();
     particle->pos += glm::vec3(0.0, -0.1, 0.0);
     
@@ -78,7 +83,7 @@ void render(void) {
     
     glutSwapBuffers();
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#!#!#!#!#!#!
-    glutPostRedisplay();
+    // glutPostRedisplay();
 }
 
 

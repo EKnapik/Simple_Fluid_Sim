@@ -22,7 +22,7 @@ GLint Sphere::numVert = 0;
 
 
 Sphere::Sphere() {
-    setupGLBuffers();
+    this->setupGLBuffers();
 }
 
 void Sphere::drawObj() {

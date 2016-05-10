@@ -119,6 +119,8 @@ void FluidParticle::updateViscosityGradSquaredVelocity(FluidParticle **fluidPart
  * for water
  */
 void FluidParticle::collisionDetection(FluidParticle **fluidParticles, int numParticles, float timeStep) {
+    // Check Bounding Box
+    
     for(int i = 0; i < numParticles; i++) {
         if(this->id != fluidParticles[i]->id) {
             // mirrorCollisionHandling(fluidParticles[i], timeStep);

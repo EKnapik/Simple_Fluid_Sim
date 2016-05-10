@@ -8,7 +8,8 @@ void main() {
 
     
     // Model transformations
-    float scale = 0.066;
+    // float scale = 0.066;
+    float scale = 0.1;
     
     // Camera parameters
     vec3 cPosition = vec3(0.0, 1.0, 5.0);

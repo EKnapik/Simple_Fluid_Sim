@@ -18,13 +18,14 @@
  witht the value too low the kernel functions won't work properly and with it
  too high the fluid will explode
  */
-#define FLUID_NUM_PARTICLES 512
+#define FLUID_NUM_PARTICLES 1000
 #define FLUID_PARTICLE_MASS 0.02
 #define FLUID_CONSTANT_K 3
 #define FLUID_FRICTION_MU 3.5
 #define FLUID_H_VALUE .045
 #define FLUID_RADIUS 0.01685  // the particle's radius
 #define FLUID_REST_DENSITY 998
+#define MAX_DISTANCE 0.4
 
 // Bounding Box
 #define xMin -2.0
@@ -47,6 +48,7 @@ public:
     void updateViscosityGradSquaredVelocity(FluidParticle **fluidParticles, int numParticles);
     void collisionDetection(FluidParticle **fluidParticles, int numParticles, float timeStep);
     void collisionHandle(FluidParticle *particle);
+    void collisionHandle(FluidParticle *particle, float distance);
     void boundsConstraint();
     
     // position covered by inheritance

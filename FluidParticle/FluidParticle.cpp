@@ -60,9 +60,13 @@ void FluidParticle::updateParticle(float timeStep, FluidParticle **fluidParticle
  */
 void FluidParticle::updateDensity(FluidParticle **fluidParticles, int numParticles) {
     float density = 0.0;
+    float dist;
     for(int i = 0; i < numParticles; i++) {
         if(this->id != fluidParticles[i]->id) {
-            density += fluidParticles[i]->mass * W(this->pos, fluidParticles[i]->pos, FLUID_H_VALUE);
+            dist = glm::length(this->pos - fluidParticles[i]->pos);
+            if(dist < MAX_DISTANCE) {
+                density += fluidParticles[i]->mass * W(this->pos, fluidParticles[i]->pos, FLUID_H_VALUE);
+            }
         }
     }
     this->density = density;
@@ -81,11 +85,15 @@ void FluidParticle::updatePressure() {
 void FluidParticle::updateGradPressureOverDensity(FluidParticle **fluidParticles, int numParticles) {
     glm::vec3 result = glm::vec3(0.0);
     float pressureScale;
+    float dist;
     for(int i = 0; i < numParticles; i++) {
         if(this->id != fluidParticles[i]->id) {
-            pressureScale = (this->pressure / (this->density * this->density));
-            pressureScale += (fluidParticles[i]->pressure / (fluidParticles[i]->density * fluidParticles[i]->density));
-            result += fluidParticles[i]->mass * pressureScale * gradientW(this->pos, fluidParticles[i]->pos, FLUID_H_VALUE);
+            dist = glm::length(this->pos - fluidParticles[i]->pos);
+            if(dist < MAX_DISTANCE) {
+                pressureScale = (this->pressure / (this->density * this->density));
+                pressureScale += (fluidParticles[i]->pressure / (fluidParticles[i]->density * fluidParticles[i]->density));
+                result += fluidParticles[i]->mass * pressureScale * gradientW(this->pos, fluidParticles[i]->pos, FLUID_H_VALUE);
+            }
         }
     }
     this->pressureTerm = result;
@@ -98,11 +106,15 @@ void FluidParticle::updateGradPressureOverDensity(FluidParticle **fluidParticles
 void FluidParticle::updateViscosityGradSquaredVelocity(FluidParticle **fluidParticles, int numParticles) {
     glm::vec3 result = glm::vec3(0.0);
     float viscosityScale = FLUID_FRICTION_MU;
+    float dist;
     glm::vec3 velocityVar;
     for(int i = 0; i < numParticles; i++) {
         if(this->id != fluidParticles[i]->id) {
-            velocityVar = (fluidParticles[i]->velocity - this->velocity) / fluidParticles[i]->density;
-            result += fluidParticles[i]->mass * velocityVar * gradientSquaredW(this->pos, fluidParticles[i]->pos, FLUID_H_VALUE);
+            dist = glm::length(this->pos - fluidParticles[i]->pos);
+            if(dist < MAX_DISTANCE) {
+                velocityVar = (fluidParticles[i]->velocity - this->velocity) / fluidParticles[i]->density;
+                result += fluidParticles[i]->mass * velocityVar * gradientSquaredW(this->pos, fluidParticles[i]->pos, FLUID_H_VALUE);
+            }
         }
     }
     result *= viscosityScale;
@@ -120,15 +132,33 @@ void FluidParticle::updateViscosityGradSquaredVelocity(FluidParticle **fluidPart
  */
 void FluidParticle::collisionDetection(FluidParticle **fluidParticles, int numParticles, float timeStep) {
     // Check Bounding Box
+    float dist;
     for(int i = 0; i < numParticles; i++) {
         if(this->id != fluidParticles[i]->id) {
-            collisionHandle(fluidParticles[i]);
+            dist = glm::length(this->pos - fluidParticles[i]->pos);
+            if(dist < MAX_DISTANCE) {
+                collisionHandle(fluidParticles[i], dist);
+            }
         }
     }
 }
 
 void FluidParticle::collisionHandle(FluidParticle *particle) {
     float dist = glm::length(this->pos - particle->pos) - this->radius - particle->radius;
+    float epsilon = 0.0001;
+    if(dist < epsilon) {
+        glm::vec3 particleNorm = glm::normalize(this->pos - particle->pos);
+        // change the velocities
+        this->velocity = glm::reflect(this->velocity, particleNorm) * float(0.9);
+        particle->velocity = glm::reflect(particle->velocity, -particleNorm) * float(0.9);
+        // move outside of the object
+        this->pos += particleNorm*(dist+epsilon);
+        particle->pos += -particleNorm*(dist+epsilon);
+    }
+}
+
+void FluidParticle::collisionHandle(FluidParticle *particle, float distance) {
+    float dist =  distance - this->radius - particle->radius;
     float epsilon = 0.0001;
     if(dist < epsilon) {
         glm::vec3 particleNorm = glm::normalize(this->pos - particle->pos);

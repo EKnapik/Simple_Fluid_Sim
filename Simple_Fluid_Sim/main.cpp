@@ -73,8 +73,8 @@ void render(void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // poll events
     // bind and draw
-    //clock_t t;
-    //t = clock();
+    clock_t t;
+    t = clock();
     float renderTime;
     // DO SOMETHING
     box->drawObj();
@@ -86,8 +86,8 @@ void render(void) {
     updateParticles();
     
     
-    //t = clock() - t;
-    //renderTime = ((float)t)/CLOCKS_PER_SEC;
+    t = clock() - t;
+    renderTime = ((float)t)/CLOCKS_PER_SEC;
     //printf("Render took (%.4f seconds)\n", renderTime);
     
     //waitTime = MICRO_FRAME_TIME - t;

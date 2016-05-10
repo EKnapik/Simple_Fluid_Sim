@@ -18,6 +18,7 @@
  witht the value too low the kernel functions won't work properly and with it
  too high the fluid will explode
  */
+// FUN NUMBERS  15x15x15: 3375   30x30x30: 27000
 #define FLUID_NUM_PARTICLES 1000
 #define FLUID_PARTICLE_MASS 0.02
 #define FLUID_CONSTANT_K 3

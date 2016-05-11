@@ -4,8 +4,8 @@ attribute vec4 vPosition;
 
 uniform vec3 trans;
 
-varying vec3 center;
 varying vec4 pos;
+varying vec4 norm;
 
 void main() {
 
@@ -66,6 +66,6 @@ void main() {
     
     gl_Position =  projMat * viewMat * modelMat * vPosition;
     
-    center = trans;
-    pos = vPosition;
+    norm =  viewMat * modelMat * normalize(-vPosition+vec4(trans, 0.0));
+    pos = viewMat * modelMat * vPosition;
 }

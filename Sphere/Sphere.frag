@@ -1,13 +1,12 @@
 #version 120
 
-varying vec3 center;
 varying vec4 pos;
+varying vec4 norm;
 
 
 
 vec3 phong() {
-    vec3 nor = normalize(pos.xyz-center);
-    vec3 lightPos = vec3(5.5, 8.0, 5.0);
+    vec3 lightPos = vec3(5.5, 2.0, 2.0);
     vec3 lightDir = normalize(lightPos - pos.xyz);
     vec3 lightCol = vec3(1.0, 0.9, 0.7);
     float diffCoeff, ambCoeff;
@@ -20,7 +19,7 @@ vec3 phong() {
     // This is calling some self reflection where the soft shadow
     // miss layers this, the ordering or priority should be fixed here
     amb = ambCoeff*vec3(1.0, 1.0, 1.0);
-    diff = diffCoeff*clamp(dot(nor,lightDir), 0.0, 1.0);
+    diff = diffCoeff*clamp(dot(norm.xyz,lightDir), 0.0, 1.0);
     brdf = material*lightCol*(diff);
     brdf += amb;
     return brdf;

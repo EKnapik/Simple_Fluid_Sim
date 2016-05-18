@@ -1,0 +1,54 @@
+Fluid Simulation Technical Report:
+This is a fluid simulation based on the Navier-Stokes equations for the
+movement of a fluid over time. The rendering of this was initially ray
+ray traced but as the number of fluid particles increased the render time for
+each frame increased dramastically causing me to switch to a rasterized OpenGL
+version of the project. The desired goal was to get a realtime realistic fluid
+simulation.
+
+Approach:
+For a fluid simulation I used the idea of incompressible individual particles
+that would represent my 'fluid'. Each particle would then be governed by the
+Navier-Stokes equations to determine the density and pressure at each timestep
+then update each particle given the current forces on my fluid. To improve the
+calcuation of each timestep I used the smooth particle hydrodynamics approach, 
+utilizing smoothing kernels for the approximation of the Navier-Stokes solution.
+
+User Guide:
+The program was made using XCode and was compiled using the XCode version of
+g++. For modifying the fluid simulation the defintions for the fluid can
+be changed within the FluidParticle.hpp file. This is a very static program
+will only show the demonstration of the current compiled fluid.
+
+Changing the Program:
+This program supports any version of fluid given the propper definitions. To
+change the timestep for each frame the #define within main.cpp can be changed
+to create any desired time iteration.
+Within the FluidParticle.hpp file several #defines can be changed to create any
+possible fluid that can be described.
+#define FLUID_NUM_PARTICLES (The number of partilces, must be cubic number 1, 8, 27...)
+#define FLUID_PARTICLE_MASS (The individual mass of each particle)
+#define FLUID_CONSTANT_K (The fluid constant applied to the density)
+#define FLUID_FRICTION_MU (The viscosity of the fluid)
+#define FLUID_H_VALUE (The Checking distance for the SPH smoothing kernels)
+#define FLUID_RADIUS (The individual particle's radius)
+#define FLUID_REST_DENSITY (The intrinsic fluid density)
+
+Running:
+Once everthing is setup and saved within the files. Compile the program and run. For
+my implementation I used XCode and the g++ compiler within MacOSX. This requires
+that the given system has OpenGL and GLUT installed on it; this is for the graphics
+interface and the windowing system.
+
+Technical Docs:
+
+
+Future Enhancements:
+One of the best enhancements would be to increase the speed at which the nearest
+26 particles can be determined. I could not get it to work and used the dot product
+distance optimization; but, if the nearest 26 particles can be grabbed quickly this
+would be the largest optimization. Other optimizations would be easy fluid property
+changes such as on the fly density changes or making this a finalized software 
+product instead of a single program.
+
+Appendix:

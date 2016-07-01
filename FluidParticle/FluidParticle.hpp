@@ -38,18 +38,21 @@
 
 class FluidParticle: public Sphere {
 public:
+    FluidParticle();
     FluidParticle(glm::vec3 pos);
     FluidParticle(glm::vec3 pos, float radius);
     
+    void initParticle(glm::vec3 pos);
     
-    void updateParticle(float timeStep, FluidParticle **fluidParticles, int numParticles);
-    void updateDensity(FluidParticle **fluidParticles, int numParticles);
+    
+    void updateParticle(float timeStep, FluidParticle *fluidParticles, int numParticles);
+    void updateDensity(FluidParticle *fluidParticles, int numParticles);
     void updatePressure();
-    void updateGradPressureOverDensity(FluidParticle **fluidParticles, int numParticles);
-    void updateViscosityGradSquaredVelocity(FluidParticle **fluidParticles, int numParticles);
-    void collisionDetection(FluidParticle **fluidParticles, int numParticles, float timeStep);
-    void collisionHandle(FluidParticle *particle);
-    void collisionHandle(FluidParticle *particle, float distance);
+    void updateGradPressureOverDensity(FluidParticle *fluidParticles, int numParticles);
+    void updateViscosityGradSquaredVelocity(FluidParticle *fluidParticles, int numParticles);
+    void collisionDetection(FluidParticle *fluidParticles, int numParticles, float timeStep);
+    void collisionHandle(FluidParticle particle);
+    void collisionHandle(FluidParticle particle, float distance);
     void boundsConstraint();
     
     // position covered by inheritance

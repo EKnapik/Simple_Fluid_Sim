@@ -23,8 +23,7 @@
 #define TIME_DELTA 0.03333
 
 // GLOBAL VARIABLES
-FluidParticle *particle;
-FluidParticle **particles;
+FluidParticle *particles;
 int numParticles;
 BoundingBox *box;
 int waitTime;
@@ -81,7 +80,7 @@ void render(void) {
     //particle->drawObj();
     //particle->pos += glm::vec3(0.0, -0.1, 0.0);
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->drawObj();
+        particles[i].drawObj();
     }
     updateParticles();
     
@@ -102,7 +101,7 @@ void render(void) {
 
 void initParticles(void) {
     numParticles = FLUID_NUM_PARTICLES;
-    particles = new FluidParticle *[numParticles];
+    particles = new FluidParticle[numParticles];
     
     float currX = 0.0;
     float currY = 1.0;
@@ -115,7 +114,7 @@ void initParticles(void) {
         for(int j = 0; j < tmp; j++) {
             currX = 0.0;
             for(int w = 0; w < tmp; w++) {
-                particles[count] = new FluidParticle(glm::vec3(currX, currY, currZ));
+                particles[count].initParticle(glm::vec3(currX, currY, currZ));
                 count++;
                 currX += (4*FLUID_RADIUS);
             }
@@ -131,32 +130,32 @@ void updateParticles(void) {
     // TODO  THERE SHOULD BE A PARTICLE ENGINEE....
     // Update the density and pressure of each particle
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->updateDensity(particles, numParticles);
+        particles[i].updateDensity(particles, numParticles);
         // printf("ID: %d, Density: %.2f\n", this->scene->particles[i]->id, this->scene->particles[i]->density);
     }
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->updatePressure();
+        particles[i].updatePressure();
         // printf("ID: %d, Pressure: %.2f\n", this->scene->particles[i]->id, this->scene->particles[i]->pressure);
     }
     // update the pressure over density term for each particle
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->updateGradPressureOverDensity(particles, numParticles);
+        particles[i].updateGradPressureOverDensity(particles, numParticles);
     }
     // update the viscosity term for each particle
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->updateViscosityGradSquaredVelocity(particles, numParticles);
+        particles[i].updateViscosityGradSquaredVelocity(particles, numParticles);
     }
     // Now move the particle
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->updateParticle(TIME_DELTA, particles, numParticles);
+        particles[i].updateParticle(TIME_DELTA, particles, numParticles);
     }
     // -----------FLUID STUFF  END------
     // collide particles with the scene objects
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->boundsConstraint();
+        particles[i].boundsConstraint();
     }
     for(int i = 0; i < numParticles; i++) {
-        particles[i]->collisionDetection(particles, numParticles, TIME_DELTA);
+        particles[i].collisionDetection(particles, numParticles, TIME_DELTA);
     }
    
 }
